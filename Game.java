@@ -46,13 +46,13 @@ public class Game
         itLab = new Room("in the IT lab");
         
         // initialise room exits
-        entrance.setExits(null, offices, it, dining, null, null);
-        offices.setExits(null, null, management, entrance, null, null);
-        management.setExits(offices, null, null, null, null, null);
-        it.setExits(entrance, null, null, null, itLab, null);
-        dining.setExits(null, entrance, null, null, kitchen, null);
-        kitchen.setExits(null, null, null, null, null, dining);
-        itLab.setExits(null, null, null, null, null, it);
+        entrance.setExits(null, offices, it, dining, null, null, kitchen, null);
+        offices.setExits(null, null, management, entrance, null, null, it, null);
+        management.setExits(offices, null, null, null, null, null, null, null);
+        it.setExits(entrance, null, null, null, itLab, null, null, offices);
+        dining.setExits(null, entrance, null, null, kitchen, null, null, null);
+        kitchen.setExits(null, null, null, null, null, dining, null, entrance);
+        itLab.setExits(null, null, null, null, null, it, null, null);
 
         currentRoom = entrance;  // start game outside
     }
@@ -152,7 +152,7 @@ public class Game
         // Try to leave current room.
         Room nextRoom = null;
 
-        nextRoom = nextRoom.getExit(direction);
+        nextRoom = currentRoom.getExit(direction);
         
         if (nextRoom == null) {
             System.out.println("There is no door!");
@@ -188,6 +188,6 @@ public class Game
     private void printLocationInfo()
     {
         System.out.println("You are " + currentRoom.getDescription());
-        currentRoom.getExitString();
+        System.out.println(currentRoom.getExitString());
     }
 }
