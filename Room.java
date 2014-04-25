@@ -14,13 +14,13 @@
  */
 public class Room 
 {
-    public String description;
-    public Room northExit;
-    public Room southExit;
-    public Room eastExit;
-    public Room westExit;
-    public Room southEastExit;
-    public Room northWestExit;
+    private String description;
+    private Room northExit;
+    private Room southExit;
+    private Room eastExit;
+    private Room westExit;
+    private Room southEastExit;
+    private Room northWestExit;
 
     /**
      * Create a room described "description". Initially, it has
@@ -67,4 +67,57 @@ public class Room
         return description;
     }
 
+    /**
+     * Return the Room object if the parameter direction matches one of the locations. If not match return null.
+     * @param direction The direction tho follow.
+     */
+    public Room getExit(String direction)
+    {
+        Room returnRoom = null;
+        if(direction.equals("north")){
+            returnRoom = northExit;
+        }else if(direction.equals("east")){
+            returnRoom = eastExit;
+        }else if(direction.equals("south")){
+            returnRoom = southExit;
+        }else if(direction.equals("west")){
+            returnRoom = westExit;
+        }else if(direction.equals("southEast")){
+            returnRoom = southEastExit;
+        }else if(direction.equals("northWest")){
+            returnRoom = northWestExit;
+        }
+        return returnRoom;
+    }
+    
+    /**
+     * Return a description of the room's exits.
+     * For example: "Exits: north east west"
+     *
+     * @ return A description of the available exits.
+     */
+    public String getExitString()
+    {
+       String stringToReturn = null;
+       System.out.print("Exits: ");
+       if(northExit != null){
+           stringToReturn = "north";
+       }
+       if(eastExit != null){
+           stringToReturn = "east";
+       }
+       if(southExit != null){
+           stringToReturn = "south";
+       }
+       if(westExit != null){
+           stringToReturn = "west";
+       }
+       if(southEastExit != null){
+           stringToReturn = "southEast";
+       }
+       if(northWestExit != null){
+           stringToReturn = "northWest";
+       }
+       return stringToReturn;
+    }
 }
