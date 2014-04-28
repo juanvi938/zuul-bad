@@ -46,13 +46,28 @@ public class Game
         itLab = new Room("in the IT lab");
         
         // initialise room exits
-        entrance.setExits(null, offices, it, dining, null, null, kitchen, null);
-        offices.setExits(null, null, management, entrance, null, null, it, null);
-        management.setExits(offices, null, null, null, null, null, null, null);
-        it.setExits(entrance, null, null, null, itLab, null, null, offices);
-        dining.setExits(null, entrance, null, null, kitchen, null, null, null);
-        kitchen.setExits(null, null, null, null, null, dining, null, entrance);
-        itLab.setExits(null, null, null, null, null, it, null, null);
+        entrance.setExit("west", dining);
+        entrance.setExit("south", it);
+        entrance.setExit("east",offices);
+        entrance.setExit("southWest", kitchen);
+        
+        offices.setExit("west",entrance);
+        offices.setExit("southWest",it);
+        offices.setExit("south",management);
+        
+        management.setExit("north",offices);
+        
+        it.setExit("north",entrance);
+        it.setExit("northEast",offices);
+        it.setExit("southEast",itLab);
+        
+        dining.setExit("east",entrance);
+        dining.setExit("southEast",kitchen);
+        
+        kitchen.setExit("northWest",dining);
+        kitchen.setExit("northEast",entrance);
+        
+        itLab.setExit("northWest",it);
 
         currentRoom = entrance;  // start game outside
     }
