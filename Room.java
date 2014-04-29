@@ -60,30 +60,9 @@ public class Room
     public String getExitString()
     {
        String stringToReturn = "Exits: ";
-       if(directions.containsKey("north")){
-           stringToReturn += "north ";
-       }
-       if(directions.containsKey("east")){
-           stringToReturn += "east ";
-       }
-       if(directions.containsKey("south")){
-           stringToReturn += "south ";
-       }
-       if(directions.containsKey("west")){
-           stringToReturn += "west ";
-       }
-       if(directions.containsKey("southEast")){
-           stringToReturn += "southEast ";
-       }
-       if(directions.containsKey("northWest")){
-           stringToReturn += "northWest ";
-       }
-       if(directions.containsKey("southWest")){
-           stringToReturn += "southWest ";
-       }
-       if(directions.containsKey("northEast")){
-           stringToReturn += "northEast ";
-       }
+       
+       stringToReturn += directions.keySet();
+       
        return stringToReturn;
     }
     
@@ -105,7 +84,7 @@ public class Room
      */
     public String getLongDescription()
     {
-        String longDescription = "You are in the " + getDescription() + "\n" + getExitString();
+        String longDescription = "You are in the " + getDescription() + "\n"  + getExitString();
         return longDescription;
     }
 }
