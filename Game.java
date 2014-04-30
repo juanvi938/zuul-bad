@@ -37,13 +37,13 @@ public class Game
         Room entrance, offices, management, it, dining, kitchen, itLab;
       
         // create the rooms
-        entrance = new Room("at the entrance of the building");
-        offices = new Room("in work offices");
-        management = new Room("in management");
-        it = new Room("in the IT department");
-        dining = new Room("in the dining room");
-        kitchen = new Room("in the kitchen");
-        itLab = new Room("in the IT lab");
+        entrance = new Room("at the entrance of the building", "box", 1F);
+        offices = new Room("in work offices", "table", 7F);
+        management = new Room("in management", "management books", 2.5F);
+        it = new Room("in the IT department", "racks of backups", 25F);
+        dining = new Room("in the dining room", "food", 10F);
+        kitchen = new Room("in the kitchen", "dish", 0.1F);
+        itLab = new Room("in the IT lab", "computer", 2.5F);
         
         // initialise room exits
         entrance.setExit("west", dining);
