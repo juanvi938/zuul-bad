@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 /**
  *  This class is the main class of the "World of Zuul" application. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
@@ -19,6 +20,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
+    private ArrayList<Room> visitedRooms;
         
     /**
      * Create the game and initialise its internal map.
@@ -27,6 +29,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
+        visitedRooms = new ArrayList<>();
     }
 
     /**
@@ -41,7 +44,7 @@ public class Game
         entrance.addItem("box",1F);
         offices = new Room("in work offices");
         offices.addItem("table", 7F);
-        management = new Room("in management");
+        management = new Room(" management");
         management.addItem("management books", 2.5F);
         it = new Room("in the IT department");
         it.addItem("racks of backups", 25F);
@@ -92,6 +95,7 @@ public class Game
         boolean finished = false;
         while (! finished) {
             Command command = parser.getCommand();
+            visitedRooms.add(currentRoom);
             finished = processCommand(command);
         }
         System.out.println("Thank you for playing.  Good bye.");
@@ -140,6 +144,9 @@ public class Game
             System.out.println(currentRoom.getLongDescription());
         }else if(commandWord.equals("eat")) {
             System.out.println("You have eaten now and you are not hungry any more");
+        }else if(commandWord.equals("back")) {
+            currentRoom = visitedRooms.get(visitedRooms.size() - 2);
+            printLocationInfo();
         }
 
         return wantToQuit;
