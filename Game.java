@@ -144,7 +144,10 @@ public class Game
         }else if(commandWord.equals("eat")) {
             System.out.println("You have eaten now and you are not hungry any more");
         }else if(commandWord.equals("back")) {
-            currentRoom = visitedRooms.pop();
+            if(visitedRooms != null)
+            {
+                currentRoom = visitedRooms.pop();
+            }
             printLocationInfo();
         }
 
