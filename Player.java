@@ -11,7 +11,7 @@ public class Player
    private Stack<Room> visitedRooms;
    
    /**
-    * 
+    * Constructor of class Player. Initialize the atributes of class.
     */
    public Player()
    {
@@ -75,7 +75,7 @@ public class Player
    }
    
    /**
-    * 
+    * Print the description of the currentRoom.
     */
    public void look()
    {
@@ -83,7 +83,7 @@ public class Player
    }
    
    /**
-    * 
+    * Return to the previous location.
     */
    public void back()
    {
@@ -92,7 +92,7 @@ public class Player
    }
    
    /**
-    * 
+    * Print a message.
     */
    public void eat()
    {
