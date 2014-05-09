@@ -102,4 +102,33 @@ public class Room
     {
         items.add(new Item(itemDescription,itemWeight));
     }
+    
+    /**
+     * Method that returns true if ArrayList items is empty. If else return fasle.
+     */
+    public boolean emptyItems()
+    {
+        boolean booleanToReturn = false;
+        if(items.size() == 0)
+        {
+            booleanToReturn = true;
+        }
+        return booleanToReturn;
+    }
+    
+    /**
+     * Method that return a object Item that matches with the parameter.
+     */
+    public Item searchItem(String itemDescription)
+    {
+        Item itemToReturn = null;
+        for(int i = 0; i < items.size(); i++)
+        {
+            if(items.get(i).getItemDescription().equals(itemDescription))
+            {
+                itemToReturn = items.get(i);
+            }
+        }
+        return itemToReturn;
+    }
 }

@@ -143,14 +143,17 @@ public class Player
     /**
      * Method to add an Item object in ArrayList.
      */
-    public void addItem(Item item)
+    public boolean addItem(Item item)
     {
+        boolean booleanToReturn = false;
         if(item.getItemWeight() > maximunWeight)
         {
             System.out.println("The weight of the object is greater than the weight that the player can have");
         }else{
             items.add(item);
+            booleanToReturn = true;
         }
+        return booleanToReturn;
     }
     
     /**
@@ -185,3 +188,4 @@ public class Player
         return itemToReturn;
     }
 }
+
