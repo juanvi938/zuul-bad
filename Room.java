@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Iterator;
 /**
  * Class Room - a room in an adventure game.
  *
@@ -130,5 +131,21 @@ public class Room
             }
         }
         return itemToReturn;
+    }
+    
+    /**
+     * Method to remove an item object whose description matches the passed parameter.
+     */
+    public void removeItem(String itemDescription)
+    {
+        Iterator<Item> it = items.iterator();
+        while(it.hasNext())
+        {
+            Item item = it.next();
+            if(item.getItemDescription().equals(itemDescription))
+            {
+                it.remove();
+            }
+        }
     }
 }
