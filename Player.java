@@ -32,6 +32,14 @@ public class Player
     {
         return weight;
     }
+    
+    /**
+     * Method to modify the atribute weight.
+     */
+    public void setWeight(float newWeight)
+    {
+        weight = newWeight;
+    }
 
     /**
      * Method that return the value of atribute maximunWeight.
@@ -146,11 +154,12 @@ public class Player
     public boolean addItem(Item item)
     {
         boolean booleanToReturn = false;
-        if(item.getItemWeight() > maximunWeight)
+        if((weight + item.getItemWeight()) > maximunWeight)
         {
             System.out.println("The weight of the object is greater than the weight that the player can have");
         }else{
             items.add(item);
+            setWeight(item.getItemWeight());
             booleanToReturn = true;
         }
         return booleanToReturn;
@@ -186,6 +195,39 @@ public class Player
             }
         }
         return itemToReturn;
+    }
+            
+    /**
+     * Try to take the Item of the Room. If it exceeds the maximunWeight supported by the player or if you can not add the item shows an error message.
+     */
+    public void take(Command command)
+    {
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("What object you want to take?");
+            return;
+        }
+
+        String itemString = command.getSecondWord();
+
+        if(currentRoom.emptyItems() == true)
+        {
+            System.out.println("No items in this room");
+        }else{
+            Item item = currentRoom.searchItem(itemString);
+            if(item == null)
+            {
+                System.out.println("No item matches with that description.");
+            }else{
+                boolean added = addItem(item);
+                if(added == true)
+                {
+                    currentRoom.removeItem(itemString);
+                }else{
+                    System.out.println("Could not add the object");
+                }
+            }
+        }
     }
 }
 

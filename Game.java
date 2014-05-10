@@ -44,9 +44,9 @@ public class Game
         offices = new Room("in work offices");
         offices.addItem("table", 7F);
         management = new Room(" management");
-        management.addItem("management books", 2.5F);
+        management.addItem("books", 2.5F);
         it = new Room("in the IT department");
-        it.addItem("racks of backups", 25F);
+        it.addItem("rack", 25F);
         dining = new Room("in the dining room");
         dining.addItem("food", 10F);
         kitchen = new Room("in the kitchen");
@@ -144,6 +144,8 @@ public class Game
             player.eat();
         }else if(commandWord.equals("back")) {
             player.back();
+        }else if(commandWord.equals("take")) {
+            player.take(command);
         }
 
         return wantToQuit;
