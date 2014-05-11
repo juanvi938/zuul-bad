@@ -148,6 +148,8 @@ public class Game
             player.take(command);
         }else if(commandWord.equals("drop")) {
             player.drop(command);
+        }else if(commandWord.equals("items")) {
+            System.out.println(player.getItemsInfo());
         }
 
         return wantToQuit;
