@@ -99,9 +99,14 @@ public class Room
     /**
      * Add Iten objects to ArrayList items.
      */
-    public void addItem(String itemDescription, float itemWeight)
+    public boolean addItem(String itemDescription, float itemWeight)
     {
-        items.add(new Item(itemDescription,itemWeight));
+        boolean booleanToReturn = false;
+        if(items.add(new Item(itemDescription,itemWeight)))
+        {
+            booleanToReturn = true;
+        }
+        return booleanToReturn;
     }
     
     /**

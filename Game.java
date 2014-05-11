@@ -146,6 +146,8 @@ public class Game
             player.back();
         }else if(commandWord.equals("take")) {
             player.take(command);
+        }else if(commandWord.equals("drop")) {
+            player.drop(command);
         }
 
         return wantToQuit;

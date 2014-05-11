@@ -32,7 +32,7 @@ public class Player
     {
         return weight;
     }
-    
+
     /**
      * Method to modify the atribute weight.
      */
@@ -147,7 +147,7 @@ public class Player
     {
         System.out.println("You have eaten now and you are not hungry any more");
     }
-    
+
     /**
      * Method to add an Item object in ArrayList.
      */
@@ -164,7 +164,7 @@ public class Player
         }
         return booleanToReturn;
     }
-    
+
     /**
      * Method to remove an Item object in ArrayList.
      */
@@ -180,7 +180,7 @@ public class Player
             }
         }
     }
-    
+
     /**
      * Method to search an object Item from ArrayList items.
      */
@@ -196,7 +196,7 @@ public class Player
         }
         return itemToReturn;
     }
-            
+
     /**
      * Try to take the Item of the Room. If it exceeds the maximunWeight supported by the player or if you can not add the item shows an error message.
      */
@@ -225,6 +225,41 @@ public class Player
                     currentRoom.removeItem(itemString);
                 }else{
                     System.out.println("Could not add the object");
+                }
+            }
+        }
+    }
+
+    /**
+     * Try to drop the Item of the Player. If you can not add the item to the Room shows an error message.
+     */
+    public void drop(Command command)
+    {
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("What object you want to drop?");
+            return;
+        }
+
+        String itemString = command.getSecondWord();
+
+        if(items == null)
+        {
+            System.out.println("The player haven't items");
+        }else{
+            Item item = searchItem(itemString);
+            String itemDescription = item.getItemDescription();
+            float itemWeight = item.getItemWeight();
+            if(item == null)
+            {
+                System.out.println("No item matches with that description.");
+            }else{
+                boolean added = currentRoom.addItem(itemDescription,itemWeight);
+                if(added == true)
+                {
+                    removeItem(itemString);
+                }else{
+                    System.out.println("Could not add the object to this room");
                 }
             }
         }
