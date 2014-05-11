@@ -19,17 +19,16 @@ import java.util.Stack;
 public class Game 
 {
     private Parser parser;
-    private Room currentRoom;
-    private Stack<Room> visitedRooms;
+    private Player player;
         
     /**
      * Create the game and initialise its internal map.
      */
     public Game() 
     {
-        createRooms();
         parser = new Parser();
-        visitedRooms = new Stack<>();
+        player = new Player();
+        createRooms();
     }
 
     /**
@@ -45,9 +44,9 @@ public class Game
         offices = new Room("in work offices");
         offices.addItem("table", 7F);
         management = new Room(" management");
-        management.addItem("management books", 2.5F);
+        management.addItem("books", 2.5F);
         it = new Room("in the IT department");
-        it.addItem("racks of backups", 25F);
+        it.addItem("rack", 25F);
         dining = new Room("in the dining room");
         dining.addItem("food", 10F);
         kitchen = new Room("in the kitchen");
@@ -79,7 +78,7 @@ public class Game
         
         itLab.setExit("northWest",it);
 
-        currentRoom = entrance;  // start game outside
+        player.setCurrentRoom(entrance);  // start game outside
     }
 
     /**
@@ -111,7 +110,7 @@ public class Game
         System.out.println("Type 'help' if you need help.");
         System.out.println();
 
-        printLocationInfo();
+        player.printLocationInfo();
         
         System.out.println();
     }
@@ -135,20 +134,30 @@ public class Game
             printHelp();
         }
         else if (commandWord.equals("go")) {
-            goRoom(command);
+            player.goRoom(command);
         }
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }else if(commandWord.equals("look")) {
-            System.out.println(currentRoom.getLongDescription());
+            player.look();
         }else if(commandWord.equals("eat")) {
-            System.out.println("You have eaten now and you are not hungry any more");
+            player.eat();
         }else if(commandWord.equals("back")) {
+<<<<<<< HEAD
             if(visitedRooms != null)
             {
                 currentRoom = visitedRooms.pop();
             }
             printLocationInfo();
+=======
+            player.back();
+        }else if(commandWord.equals("take")) {
+            player.take(command);
+        }else if(commandWord.equals("drop")) {
+            player.drop(command);
+        }else if(commandWord.equals("items")) {
+            System.out.println(player.getItemsInfo());
+>>>>>>> player
         }
 
         return wantToQuit;
@@ -171,38 +180,6 @@ public class Game
     }
 
     /** 
-     * Try to go in one direction. If there is an exit, enter
-     * the new room, otherwise print an error message.
-     */
-    private void goRoom(Command command) 
-    {
-        if(!command.hasSecondWord()) {
-            // if there is no second word, we don't know where to go...
-            System.out.println("Go where?");
-            return;
-        }
-
-        String direction = command.getSecondWord();
-
-        // Try to leave current room.
-        Room nextRoom = null;
-
-        nextRoom = currentRoom.getExit(direction);
-        
-        if (nextRoom == null) {
-            System.out.println("There is no door!");
-        }
-        else {
-            visitedRooms.push(currentRoom);
-            currentRoom = nextRoom;
-            
-            printLocationInfo();
-            
-            System.out.println();
-        }
-    }
-
-    /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
      * @return true, if this command quits the game, false otherwise.
@@ -216,13 +193,5 @@ public class Game
         else {
             return true;  // signal that we want to quit
         }
-    }
-    
-    /**
-     * Print the location information of the current room.
-     */
-    private void printLocationInfo()
-    {
-        System.out.println(currentRoom.getLongDescription());
     }
 }

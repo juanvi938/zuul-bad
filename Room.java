@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Iterator;
 /**
  * Class Room - a room in an adventure game.
  *
@@ -98,8 +99,58 @@ public class Room
     /**
      * Add Iten objects to ArrayList items.
      */
-    public void addItem(String itemDescription, float itemWeight)
+    public boolean addItem(String itemDescription, float itemWeight)
     {
-        items.add(new Item(itemDescription,itemWeight));
+        boolean booleanToReturn = false;
+        if(items.add(new Item(itemDescription,itemWeight)))
+        {
+            booleanToReturn = true;
+        }
+        return booleanToReturn;
+    }
+    
+    /**
+     * Method that returns true if ArrayList items is empty. If else return fasle.
+     */
+    public boolean emptyItems()
+    {
+        boolean booleanToReturn = false;
+        if(items.size() == 0)
+        {
+            booleanToReturn = true;
+        }
+        return booleanToReturn;
+    }
+    
+    /**
+     * Method that return a object Item that matches with the parameter.
+     */
+    public Item searchItem(String itemDescription)
+    {
+        Item itemToReturn = null;
+        for(int i = 0; i < items.size(); i++)
+        {
+            if(items.get(i).getItemDescription().equals(itemDescription))
+            {
+                itemToReturn = items.get(i);
+            }
+        }
+        return itemToReturn;
+    }
+    
+    /**
+     * Method to remove an item object whose description matches the passed parameter.
+     */
+    public void removeItem(String itemDescription)
+    {
+        Iterator<Item> it = items.iterator();
+        while(it.hasNext())
+        {
+            Item item = it.next();
+            if(item.getItemDescription().equals(itemDescription))
+            {
+                it.remove();
+            }
+        }
     }
 }
