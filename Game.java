@@ -143,13 +143,11 @@ public class Game
         }else if(commandWord.equals("eat")) {
             player.eat();
         }else if(commandWord.equals("back")) {
-<<<<<<< HEAD
-            if(visitedRooms != null)
+            if(player.emptyVisitedRooms() == true)
             {
-                currentRoom = visitedRooms.pop();
+                player.removeVisitedRoom();
             }
-            printLocationInfo();
-=======
+            player.printLocationInfo();
             player.back();
         }else if(commandWord.equals("take")) {
             player.take(command);
@@ -157,7 +155,6 @@ public class Game
             player.drop(command);
         }else if(commandWord.equals("items")) {
             System.out.println(player.getItemsInfo());
->>>>>>> player
         }
 
         return wantToQuit;

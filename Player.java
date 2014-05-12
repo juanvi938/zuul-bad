@@ -82,6 +82,22 @@ public class Player
     {
         currentRoom = newCurrentRoom;
     }
+    
+    /**
+     * Method that return true if the Stack visitedRooms is empty, else return false.
+     */
+    public boolean emptyVisitedRooms()
+    {
+        return visitedRooms.empty();
+    }
+    
+    /**
+     * Remove the last item of stack and asign the item to currentRoom.
+     */
+    public void removeVisitedRoom()
+    {
+        currentRoom = visitedRooms.pop();
+    }
 
     /** 
      * Try to go in one direction. If there is an exit, enter
