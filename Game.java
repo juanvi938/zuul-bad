@@ -129,31 +129,32 @@ public class Game
             return false;
         }
 
-        String commandWord = command.getCommandWord();
-        if (commandWord.equals("help")) {
+        //Cambiado de String a Option
+        Option commandWord = command.getCommandWord();
+        if (commandWord == Option.HELP) {
             printHelp();
         }
-        else if (commandWord.equals("go")) {
+        else if (commandWord == Option.GO) {
             player.goRoom(command);
         }
-        else if (commandWord.equals("quit")) {
+        else if (commandWord == Option.QUIT) {
             wantToQuit = quit(command);
-        }else if(commandWord.equals("look")) {
+        }else if(commandWord == Option.LOOK) {
             player.look();
-        }else if(commandWord.equals("eat")) {
+        }else if(commandWord == Option.EAT) {
             player.eat();
-        }else if(commandWord.equals("back")) {
+        }else if(commandWord == Option.BACK) {
             if(player.emptyVisitedRooms() == true)
             {
                 player.removeVisitedRoom();
             }
             player.printLocationInfo();
             player.back();
-        }else if(commandWord.equals("take")) {
+        }else if(commandWord == Option.TAKE) {
             player.take(command);
-        }else if(commandWord.equals("drop")) {
+        }else if(commandWord == Option.DROP) {
             player.drop(command);
-        }else if(commandWord.equals("items")) {
+        }else if(commandWord == Option.ITEMS) {
             System.out.println(player.getItemsInfo());
         }
 
