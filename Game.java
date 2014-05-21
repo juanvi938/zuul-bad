@@ -20,7 +20,7 @@ public class Game
 {
     private Parser parser;
     private Player player;
-        
+
     /**
      * Create the game and initialise its internal map.
      */
@@ -37,7 +37,7 @@ public class Game
     private void createRooms()
     {
         Room entrance, offices, management, it, dining, kitchen, itLab;
-      
+
         // create the rooms
         entrance = new Room("at the entrance of the building");
         entrance.addItem("box",1F);
@@ -53,29 +53,29 @@ public class Game
         kitchen.addItem("dish", 0.1F);
         itLab = new Room("in the IT lab");
         itLab.addItem("computer", 2.5F);
-        
+
         // initialise room exits
         entrance.setExit("west", dining);
         entrance.setExit("south", it);
         entrance.setExit("east",offices);
         entrance.setExit("southWest", kitchen);
-        
+
         offices.setExit("west",entrance);
         offices.setExit("southWest",it);
         offices.setExit("south",management);
-        
+
         management.setExit("north",offices);
-        
+
         it.setExit("north",entrance);
         it.setExit("northEast",offices);
         it.setExit("southEast",itLab);
-        
+
         dining.setExit("east",entrance);
         dining.setExit("southEast",kitchen);
-        
+
         kitchen.setExit("northWest",dining);
         kitchen.setExit("northEast",entrance);
-        
+
         itLab.setExit("northWest",it);
 
         player.setCurrentRoom(entrance);  // start game outside
@@ -90,7 +90,7 @@ public class Game
 
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
-                
+
         boolean finished = false;
         while (! finished) {
             Command command = parser.getCommand();
@@ -111,7 +111,7 @@ public class Game
         System.out.println();
 
         player.printLocationInfo();
-        
+
         System.out.println();
     }
 
@@ -131,33 +131,35 @@ public class Game
 
         //Cambiado de String a Option
         Option commandWord = command.getCommandWord();
-        if (commandWord == Option.HELP) {
+        switch (commandWord){
+            case HELP:
             printHelp();
-        }
-        else if (commandWord == Option.GO) {
+            break;
+            case GO:
             player.goRoom(command);
-        }
-        else if (commandWord == Option.QUIT) {
-            wantToQuit = quit(command);
-        }else if(commandWord == Option.LOOK) {
+            break;
+            case LOOK:
             player.look();
-        }else if(commandWord == Option.EAT) {
+            break;
+            case EAT:
             player.eat();
-        }else if(commandWord == Option.BACK) {
-            if(player.emptyVisitedRooms() == true)
-            {
-                player.removeVisitedRoom();
-            }
-            player.printLocationInfo();
+            break;
+            case BACK:
             player.back();
-        }else if(commandWord == Option.TAKE) {
+            break;
+            case ITEMS:
+            player.getItemsInfo();
+            break;
+            case TAKE:
             player.take(command);
-        }else if(commandWord == Option.DROP) {
+            break;
+            case QUIT:
+            wantToQuit = quit(command);
+            break;
+            case DROP:
             player.drop(command);
-        }else if(commandWord == Option.ITEMS) {
-            System.out.println(player.getItemsInfo());
+            break;
         }
-
         return wantToQuit;
     }
 
