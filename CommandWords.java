@@ -13,23 +13,13 @@ import java.util.HashMap;
 public class CommandWords
 {
     // a constant array that holds all valid command words
-    private static HashMap<String,Option> validCommands;
-
+    private Option[] commands;
     /**
      * Constructor - initialise the command words.
      */
     public CommandWords()
     {
-        validCommands = new HashMap<>();
-        validCommands.put("ir",Option.GO);
-        validCommands.put("salir",Option.QUIT);
-        validCommands.put("ayuda",Option.HELP);
-        validCommands.put("mirar",Option.LOOK);
-        validCommands.put("comer",Option.EAT);
-        validCommands.put("atras",Option.BACK);
-        validCommands.put("coger",Option.TAKE);
-        validCommands.put("dejar",Option.DROP);
-        validCommands.put("objetos",Option.ITEMS);
+        commands = Option.values();
     }
 
     /**
@@ -39,20 +29,34 @@ public class CommandWords
      */
     public boolean isCommand(String aString)
     {
-        boolean booleanToReturn = validCommands.containsKey(aString);
-        return booleanToReturn;
+        boolean command = false;
+        int index = 0;
+        while(index < commands.length && !command){
+            Option key = commands[index];
+            if(key.getOptionString().equals(aString)){
+                if(key != Option.UNKNOWN){
+                    command = true;
+                }
+            }
+            index++;
+        }
+
+        return command;
     }
-    
+
     /**
      * Print all valid commands to System.out
      */
     public void showAll()
     {
-        for (String key : validCommands.keySet()){
-            System.out.print(key +", ");
+        for(Option option: commands) {
+            if(option != Option.UNKNOWN)
+            {
+                System.out.print(option.getOptionString());
+            }
         }
     }
-    
+
     /**
      * Return the Option associated with a word.
      * @param commandWord The word to look up (as a string).
@@ -62,9 +66,14 @@ public class CommandWords
     public Option getCommandWord(String commandWord)
     {
         Option option = Option.UNKNOWN;
-          
-        if(isCommand(commandWord)){
-            option = validCommands.get(commandWord);
+        boolean found = false;
+        int index = 0;
+        while(index < commands.length && !found){
+            if(commands[index].getOptionString().equals(commandWord)){
+                option = commands[index];
+                found = true;
+            }
+            index++;
         }
 
         return option;
