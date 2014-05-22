@@ -20,6 +20,7 @@ public class Room
     private String description;
     private HashMap<String,Room> directions;
     private ArrayList<Item> items;
+    private int itemsToWin;
 
     /**
      * Create a room described "description". Initially, it has
@@ -54,7 +55,7 @@ public class Room
 
         return returnRoom;
     }
-    
+
     /**
      * Return a description of the room's exits.
      * For example: "Exits: north east west"
@@ -63,13 +64,21 @@ public class Room
      */
     public String getExitString()
     {
-       String stringToReturn = "Exits: ";
-       
-       stringToReturn += directions.keySet();
-       
-       return stringToReturn;
+        String stringToReturn = "Exits: ";
+
+        stringToReturn += directions.keySet();
+
+        return stringToReturn;
     }
-    
+
+    /**
+     * Return the value of itemsToWin from Room or null if it haven't any itemsToWin.
+     */
+    public int getItemsToWin()
+    {
+        return itemsToWin;
+    }
+
     /**
      * Define an exit from this room.
      * @param direction The direction of the exit.
@@ -79,7 +88,15 @@ public class Room
     {
         directions.put(direction,neighbor);
     }
-    
+
+    /**
+     * Define the limit of items in the room.
+     */
+    public void setItemsToWin(int itemsToWin)
+    {
+        this.itemsToWin = itemsToWin;
+    }
+
     /**
      * Return a long description of this room, of the form:
      *     You are in the 'name of room'
@@ -95,7 +112,7 @@ public class Room
         }
         return longDescription;
     }
-    
+
     /**
      * Add Iten objects to ArrayList items.
      */
@@ -108,7 +125,7 @@ public class Room
         }
         return booleanToReturn;
     }
-    
+
     /**
      * Method that returns true if ArrayList items is empty. If else return fasle.
      */
@@ -121,7 +138,7 @@ public class Room
         }
         return booleanToReturn;
     }
-    
+
     /**
      * Method that return a object Item that matches with the parameter.
      */
@@ -137,7 +154,7 @@ public class Room
         }
         return itemToReturn;
     }
-    
+
     /**
      * Method to remove an item object whose description matches the passed parameter.
      */
@@ -152,5 +169,24 @@ public class Room
                 it.remove();
             }
         }
+    }
+
+    /**
+     * Method to check if the room overcomes the limit of the items.
+     * @return booleanToReturn 
+     * true: if the limit have overcomed.
+     * false: if the limit haven't overcomed.
+     */
+    public boolean checkLimitItems()
+    {
+        boolean booleanToReturn = false;
+        if(itemsToWin != 0)
+        {
+            if(items.size() == itemsToWin)
+            {
+                booleanToReturn = true;
+            }
+        }
+        return booleanToReturn;
     }
 }
