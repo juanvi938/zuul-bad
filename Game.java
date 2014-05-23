@@ -78,6 +78,11 @@ public class Game
 
         itLab.setExit("northWest",it);
 
+        //set the rooms and the limit of the items to win
+        itLab.setItemsToWin(1);
+        kitchen.setItemsToWin(3);
+        management.setItemsToWin(3);
+
         player.setCurrentRoom(entrance);  // start game outside
     }
 
@@ -158,6 +163,13 @@ public class Game
             break;
             case DROP:
             player.drop(command);
+            if(player.getCurrentRoom().checkLimitItems() == true)
+            {
+                System.out.println("CONGRATULATIONS!: YOU WIN THE ZUUL-BLAD GAME");
+                wantToQuit = true;
+            }else{
+                System.out.println("Keep it up!");
+            }
             break;
         }
         return wantToQuit;

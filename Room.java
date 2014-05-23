@@ -182,7 +182,7 @@ public class Room
         boolean booleanToReturn = false;
         if(itemsToWin != 0)
         {
-            if(items.size() == itemsToWin)
+            if(items.size() >= itemsToWin)
             {
                 booleanToReturn = true;
             }
