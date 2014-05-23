@@ -79,7 +79,7 @@ public class Game
         itLab.setExit("northWest",it);
 
         //set the rooms and the limit of the items to win
-        itLab.setItemsToWin(1);
+        itLab.setItemsToWin(2);
         kitchen.setItemsToWin(3);
         management.setItemsToWin(3);
 
