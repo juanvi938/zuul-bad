@@ -46,8 +46,7 @@ public class Command
     }
 
     /**
-     * @return The second word of this command. Returns null if there was no
-     * second word.
+     * Modify the second word of this command.
      */
     public String getSecondWord()
     {
